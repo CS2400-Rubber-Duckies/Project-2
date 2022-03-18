@@ -1,9 +1,6 @@
 public class LinkedStack<T> implements StackInterface<T> {
     private Node topNode;
 
-    /**
-     * Default Constructor
-     */
     public LinkedStack() {
         topNode = null;
     }
@@ -16,7 +13,7 @@ public class LinkedStack<T> implements StackInterface<T> {
     {
         if (topNode != null)
         T top = peek();
-        topNode = topNode.getNextNode();
+        topNode = topNode.getNext();
         return top;
     }
 
@@ -37,16 +34,44 @@ public class LinkedStack<T> implements StackInterface<T> {
     }
 
     private class Node {
-        public Node(T newEntry, LinkedStack<T>.Node topNode) {
+       
+            private T data;
+            private Node next;
+                
+            
+               
+                public void setData (T val) {
+                data = this.data
+                public T getData () {
+                }
+                return data;
+                public Node getNext () {
+                return next;
+                }
+                public void setNext (Node n) {
+                    next = n;
+                }
+                
+                
 
+        }}
+        @Override
+        public String convertToPostfix() {
+            // TODO Auto-generated method stub
+            return null;
         }
-
-        private T data;
-        private Node next;
-
+        @Override
+        public String evaluatePostfix() {
+            // TODO Auto-generated method stub
+            return null;
+        }
+        
     }
 
-}
+  
+   
+
+
 
 // Algorithm convertToPostfix(infix)
 // // Converts an infix expression to an equivalent postfix expression.

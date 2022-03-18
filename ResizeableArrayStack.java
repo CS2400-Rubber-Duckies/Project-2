@@ -23,6 +23,10 @@ public final class ResizeableArrayStack<T> implements StackInterface {
 topIndex = -1;
        IntegrityOK = true;
     }
+    private void checkCapacity(int initialCapacity) {
+
+    }
+
     private void ensureCapacity()
 {
    if (topIndex >= stack.length - 1) // If array is full, double its size
@@ -124,6 +128,46 @@ char popped;
     @Override
     public String evaluatePostfix(String postfix) {
        
+        ResizeableArrayStack<Integer> stack=new ResizeableArrayStack<>();
+         
+        // Scan all characters one by one
+        for(int i=0;i<postfix.length();i++)
+        {
+            char c=postfix.charAt(i);
+             
+            // If the scanned character is an operand (number here),
+            // push it to the stack.
+            if(Character.isDigit(c))
+            stack.push(c - '0');
+             
+            //  If the scanned character is an operator, pop two
+            // elements from stack apply the operator
+            else
+            {
+                int val1 = (int) stack.pop();
+                int val2 = (int) stack.pop();
+                 
+                switch(c)
+                {
+                    case '+':
+                    stack.push(val2+val1);
+                    break;
+                     
+                    case '-':
+                    stack.push(val2- val1);
+                    break;
+                     
+                    case '/':
+                    stack.push(val2/val1);
+                    break;
+                     
+                    case '*':
+                    stack.push(val2*val1);
+                    break;
+              }
+            }
+        }
+        return (String) stack.pop();   
     }
 
    
