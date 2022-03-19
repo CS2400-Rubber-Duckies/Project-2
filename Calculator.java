@@ -5,7 +5,7 @@ import java.util.*;
         ResizeableArrayStack <String> tStack = new  ResizeableArrayStack<>();
 
         String infix = "a*b/(c-a)+d*e" ;
-        String postfix = "23*42-/56*+"; 
+        String postfix = "2 3 * 4 2 - / 5 6 * +"; 
 
         System.out.println("Infix : " + infix);
         System.out.println("Postfix : " +  tStack.convertToPostfix(infix));
