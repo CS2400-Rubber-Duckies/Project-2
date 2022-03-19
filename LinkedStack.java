@@ -36,56 +36,57 @@ public class LinkedStack<T> implements StackInterface<T> {
     }
 
     private class Node {
-       
-            private T data;
-            private Node next;
-                
-            
-               
-                public void setData (T val) {
-                data = this.data
                 public T getData () {
-                }
-                return data;
-                public Node getNext () {
-                return next;
-                }
-                public void setNext (Node n) {
-                    next = n;
-                }
-                
-                
+        T data;
+        Node next;
 
-        }}
-        @Override
-        public String convertToPostfix() {
-            // TODO Auto-generated method stub
-            return null;
-        }
-        @Override
-        public String evaluatePostfix() {
-            // TODO Auto-generated method stub
-            return null;
+        public Node(T val, Node n) {
+            data = val;
+            next = n;
         }
 
-        @Override
-        public String convertToPostfix(String infix) {
-            // TODO Auto-generated method stub
-            return null;
+        public void setData(T val) {
+            data = val;
         }
 
-        @Override
-        public String evaluatePostfix(String postfix) {
-            // TODO Auto-generated method stub
-            return null;
+        public T getData() {
+            return data;
         }
-        
+
+        public Node getNext() {
+            return next;
+        }
+
+        public void setNext(Node n) {
+            next = n;
+        }
     }
 
-  
-   
+    @Override
+    public String convertToPostfix() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
+    @Override
+    public String evaluatePostfix() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
+    @Override
+    public String convertToPostfix(String infix) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String evaluatePostfix(String postfix) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+}
 
 // Algorithm convertToPostfix(infix)
 // // Converts an infix expression to an equivalent postfix expression.
