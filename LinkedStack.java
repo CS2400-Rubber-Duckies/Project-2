@@ -35,34 +35,8 @@ public class LinkedStack<T> implements StackInterface<T> {
         topNode = null;
     }
 
-    private class Node {
-                public T getData () {
-        T data;
-        Node next;
 
-        public Node(T val, Node n) {
-            data = val;
-            next = n;
-        }
-
-        public void setData(T val) {
-            data = val;
-        }
-
-        public T getData() {
-            return data;
-        }
-
-        public Node getNext() {
-            return next;
-        }
-
-        public void setNext(Node n) {
-            next = n;
-        }
-    }
-
-    @Override
+        
     public String convertToPostfix() {
         // TODO Auto-generated method stub
         return null;
