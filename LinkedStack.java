@@ -1,3 +1,5 @@
+import java.util.EmptyStackException;
+
 public class LinkedStack<T> implements StackInterface<T> {
     private Node topNode;
 
@@ -62,6 +64,18 @@ public class LinkedStack<T> implements StackInterface<T> {
         }
         @Override
         public String evaluatePostfix() {
+            // TODO Auto-generated method stub
+            return null;
+        }
+
+        @Override
+        public String convertToPostfix(String infix) {
+            // TODO Auto-generated method stub
+            return null;
+        }
+
+        @Override
+        public String evaluatePostfix(String postfix) {
             // TODO Auto-generated method stub
             return null;
         }
