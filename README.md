@@ -5,6 +5,6 @@ Rubber Duckies: Gelila Chaka and UyenNghi Nguyen
 - UyenNghi worked on the LinkedStack methods.
 - We worked together on the Calculator and unit testing.
 
-Video Link: https://www.youtube.com/watch?v=pSDgxDUG-Vg
+Video Link: 
 
-Javadoc Link: https://github.com/CS2400-Rubber-Duckies/Project1/blob/main/JavaDoc.html
+Javadoc Link: 
