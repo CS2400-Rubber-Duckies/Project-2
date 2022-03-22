@@ -11,9 +11,7 @@ public class LinkedStack<T> implements StackInterface<T> {
         topNode = new Node(newEntry, topNode);
     }
 
-    public T pop()
-    {
-        if (topNode != null)
+    public T pop() {
         T top = peek();
         topNode = topNode.getNext();
         return top;
@@ -117,16 +115,51 @@ public class LinkedStack<T> implements StackInterface<T> {
     // Append topOperator to postfix }
     // return postfix
 
+    private static boolean isOperator(char i) {
+        return precedence(i) > 0;
+    }
+
+    private static int precedence(char i) {
+        if (i == '(' || i == ')') {
+            return 1;
+        } else if (i == '-' || i == '+') {
+            return 2;
+        } else if (i == '*' || i == '/') {
+            return 3;
+        } else {
+            return 0;
+        }
+
+    }
+
     public String convertToPostfix(String infix) {
-        LinkedStack<T> operatorStack = new LinkedStack<T>();
+        LinkedStack<Character> operatorStack = new LinkedStack<Character>();
         String postfix = "";
-        return postfix;
+        char popped;
+
         for (int i = 0; i < infix.length(); i++) {
             char character = infix.charAt(i);
 
-            if (!isOperator(character))
+            if (!isOperator(character)) {
+                postfix += character;
+            } else if (character == ')') {
+                while ((popped = operatorStack.pop()) != '(') {
+                    postfix += popped;
+                }
+            } else {
+                while (!operatorStack.isEmpty() && character != '('
+                        && precedence(operatorStack.peek()) >= precedence(character)) {
+                    postfix += operatorStack.pop();
+                }
+                operatorStack.push(character);
+            }
 
         }
+
+        while (!operatorStack.isEmpty()) {
+            postfix += operatorStack.pop();
+        }
+
         return postfix;
 
     }
