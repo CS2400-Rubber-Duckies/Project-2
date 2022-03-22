@@ -59,21 +59,54 @@ public class LinkedStack<T> implements StackInterface<T> {
         }
     }
 
-    public String convertToPostfix() {
-        // TODO Auto-generated method stub
-        return null;
+    private static boolean isOperator(char i) {
+        return precedence(i) > 0;
     }
 
-    @Override
-    public String evaluatePostfix() {
-        // TODO Auto-generated method stub
-        return null;
+    private static int precedence(char i) {
+        if (i == '(' || i == ')') {
+            return 1;
+        } else if (i == '-' || i == '+') {
+            return 2;
+        } else if (i == '*' || i == '/') {
+            return 3;
+        } else {
+            return 0;
+        }
+
     }
 
     @Override
     public String convertToPostfix(String infix) {
-        // TODO Auto-generated method stub
-        return null;
+        LinkedStack<Character> operatorStack = new LinkedStack<Character>();
+        String postfix = "";
+        char popped;
+
+        for (int i = 0; i < infix.length(); i++) {
+            char character = infix.charAt(i);
+
+            if (!isOperator(character)) {
+                postfix += character;
+            } else if (character == ')') {
+                while ((popped = operatorStack.pop()) != '(') {
+                    postfix += popped;
+                }
+            } else {
+                while (!operatorStack.isEmpty() && character != '('
+                        && precedence(operatorStack.peek()) >= precedence(character)) {
+                    postfix += operatorStack.pop();
+                }
+                operatorStack.push(character);
+            }
+
+        }
+
+        while (!operatorStack.isEmpty()) {
+            postfix += operatorStack.pop();
+        }
+
+        return postfix;
+
     }
 
     @Override
@@ -81,8 +114,6 @@ public class LinkedStack<T> implements StackInterface<T> {
         // TODO Auto-generated method stub
         return null;
     }
-
-}
 
     // Algorithm convertToPostfix(infix)
     // // Converts an infix expression to an equivalent postfix expression.
@@ -115,52 +146,4 @@ public class LinkedStack<T> implements StackInterface<T> {
     // Append topOperator to postfix }
     // return postfix
 
-    private static boolean isOperator(char i) {
-        return precedence(i) > 0;
-    }
-
-    private static int precedence(char i) {
-        if (i == '(' || i == ')') {
-            return 1;
-        } else if (i == '-' || i == '+') {
-            return 2;
-        } else if (i == '*' || i == '/') {
-            return 3;
-        } else {
-            return 0;
-        }
-
-    }
-
-    public String convertToPostfix(String infix) {
-        LinkedStack<Character> operatorStack = new LinkedStack<Character>();
-        String postfix = "";
-        char popped;
-
-        for (int i = 0; i < infix.length(); i++) {
-            char character = infix.charAt(i);
-
-            if (!isOperator(character)) {
-                postfix += character;
-            } else if (character == ')') {
-                while ((popped = operatorStack.pop()) != '(') {
-                    postfix += popped;
-                }
-            } else {
-                while (!operatorStack.isEmpty() && character != '('
-                        && precedence(operatorStack.peek()) >= precedence(character)) {
-                    postfix += operatorStack.pop();
-                }
-                operatorStack.push(character);
-            }
-
-        }
-
-        while (!operatorStack.isEmpty()) {
-            postfix += operatorStack.pop();
-        }
-
-        return postfix;
-
-    }
 }
