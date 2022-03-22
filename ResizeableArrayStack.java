@@ -172,7 +172,7 @@ public final class ResizeableArrayStack<T> implements StackInterface<T> {
                 }
             }
         }
-        return stack.pop().toString();
+        return stack.peek().toString();
     }
 
 }

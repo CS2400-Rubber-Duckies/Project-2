@@ -97,7 +97,6 @@ public class LinkedStack<T> implements StackInterface<T> {
                 }
                 operatorStack.push(character);
             }
-
         }
 
         while (!operatorStack.isEmpty()) {
