@@ -110,8 +110,32 @@ public class LinkedStack<T> implements StackInterface<T> {
 
     @Override
     public String evaluatePostfix(String postfix) {
+        LinkedStack<Integer> valueStack = new LinkedStack<Integer>();
+        int result;
 
-        return null;
+        for (int i = 0; i < postfix.length(); i++) {
+            char c = postfix.charAt(i);
+            if (Character.isDigit(c)) {
+                valueStack.push(c - '0');
+            } else {
+                int operandTwo = valueStack.pop();
+                int operandOne = valueStack.pop();
+                if (c == '+') {
+                    result = operandTwo + operandOne;
+                    valueStack.push(result);
+                } else if (c == '-') {
+                    result = operandTwo - operandOne;
+                    valueStack.push(result);
+                } else if (c == '/') {
+                    result = operandTwo / operandOne;
+                    valueStack.push(result);
+                } else if (c == '*') {
+                    result = operandTwo * operandOne;
+                    valueStack.push(result);
+                }
+            }
+        }
+        return valueStack.peek().toString();
     }
 
     // Algorithm convertToPostfix(infix)
