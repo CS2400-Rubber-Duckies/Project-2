@@ -1,7 +1,7 @@
 import java.util.Arrays;
 import java.util.EmptyStackException;
 
-public final class ResizeableArrayStack<T> implements StackInterface {
+public final class ResizeableArrayStack<T> implements StackInterface<T> {
     private T[] stack;
     private int topIndex;
     private boolean IntegrityOK = false;
@@ -12,54 +12,52 @@ public final class ResizeableArrayStack<T> implements StackInterface {
         this(DEFAULT_CAPACITY);
     }
 
-    public ResizeableArrayStack(int initialCapacity)
-    {
+    public ResizeableArrayStack(int initialCapacity) {
         IntegrityOK = false;
         checkCapacity(initialCapacity);
 
-        @SuppressWarnings("unchecked" )
-        T[] tempStack = (T[])new Object[initialCapacity];
-       stack = tempStack;
-topIndex = -1;
-       IntegrityOK = true;
+        @SuppressWarnings("unchecked")
+        T[] tempStack = (T[]) new Object[initialCapacity];
+        stack = tempStack;
+        topIndex = -1;
+        IntegrityOK = true;
     }
+
     private void checkCapacity(int initialCapacity) {
-//TO DO 
+        // TO DO
     }
 
-    private void ensureCapacity()
-{
-   if (topIndex >= stack.length - 1) // If array is full, double its size
-   {
-      int newLength = 2 * stack.length;
-      checkCapacity(newLength);
-      stack = Arrays.copyOf(stack, newLength);
-   } // end if
-} 
-    @Override
-    public void push(Object newEntry) {
-       // checkInyegrity();
-   ensureCapacity();
-   stack[topIndex + 1] = (T) newEntry;
-   topIndex++;
-        
+    private void ensureCapacity() {
+        if (topIndex >= stack.length - 1) // If array is full, double its size
+        {
+            int newLength = 2 * stack.length;
+            checkCapacity(newLength);
+            stack = Arrays.copyOf(stack, newLength);
+        } // end if
     }
 
-  
+    @Override
+    public void push(T newEntry) {
+        // checkInyegrity();
+        ensureCapacity();
+        stack[topIndex + 1] = newEntry;
+        topIndex++;
+
+    }
 
     @Override
-    public Object pop() {
+    public T pop() {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public Object peek() {
-       // checkIntegrity();
+    public T peek() {
+        // checkIntegrity();
         if (isEmpty())
-           throw new EmptyStackException();
+            throw new EmptyStackException();
         else
-           return stack[topIndex];
+            return stack[topIndex];
     }
 
     @Override
@@ -69,34 +67,39 @@ topIndex = -1;
 
     @Override
     public void clear() {
-       // checkIntegrity();
-      
-      // Remove references to the objects in the stack,
-      // but do not deallocate the array
-      while (topIndex > -1)
-      {
-          stack[topIndex] = null;
-          topIndex--;
-      }
-        
+        // checkIntegrity();
+
+        // Remove references to the objects in the stack,
+        // but do not deallocate the array
+        while (topIndex > -1) {
+            stack[topIndex] = null;
+            topIndex--;
+        }
+
     }
+
     private static boolean isOperator(char i) {
         return precedence(i) > 0;
     }
+
     private static int precedence(char i) {
 
-        if (i == '(' || i == ')') return 1;
-        else if (i == '-' || i == '+') return 2;
-        else if (i == '*' || i == '/') return 3;
-        else return 0;
+        if (i == '(' || i == ')')
+            return 1;
+        else if (i == '-' || i == '+')
+            return 2;
+        else if (i == '*' || i == '/')
+            return 3;
+        else
+            return 0;
     }
 
     @Override
     public String convertToPostfix(String infix) {
         String postfix = "";
         ResizeableArrayStack<Character> operator = new ResizeableArrayStack<Character>();
-        
-char popped;
+
+        char popped;
 
         for (int i = 0; i < infix.length(); i++) {
 
@@ -121,54 +124,49 @@ char popped;
             postfix += operator.pop();
 
         return postfix;
-        
-    }
 
+    }
 
     @Override
     public String evaluatePostfix(String postfix) {
-       
-        ResizeableArrayStack<Integer> stack=new ResizeableArrayStack<>();
-         
+
+        ResizeableArrayStack<Integer> stack = new ResizeableArrayStack<>();
+
         // Scan all characters one by one
-        for(int i=0;i<postfix.length();i++)
-        {
-            char c=postfix.charAt(i);
-             
+        for (int i = 0; i < postfix.length(); i++) {
+            char c = postfix.charAt(i);
+
             // If the scanned character is an operand (number here),
             // push it to the stack.
-            if(Character.isDigit(c))
-            stack.push(c - '0');
-             
-            //  If the scanned character is an operator, pop two
+            if (Character.isDigit(c))
+                stack.push(c - '0');
+
+            // If the scanned character is an operator, pop two
             // elements from stack apply the operator
-            else
-            {
+            else {
                 int val1 = (int) stack.pop();
                 int val2 = (int) stack.pop();
-                 
-                switch(c)
-                {
+
+                switch (c) {
                     case '+':
-                    stack.push(val2+val1);
-                    break;
-                     
+                        stack.push(val2 + val1);
+                        break;
+
                     case '-':
-                    stack.push(val2- val1);
-                    break;
-                     
+                        stack.push(val2 - val1);
+                        break;
+
                     case '/':
-                    stack.push(val2/val1);
-                    break;
-                     
+                        stack.push(val2 / val1);
+                        break;
+
                     case '*':
-                    stack.push(val2*val1);
-                    break;
-              }
+                        stack.push(val2 * val1);
+                        break;
+                }
             }
         }
-        return (String) stack.pop();   
+        return (String) stack.pop();
     }
 
-   
 }
