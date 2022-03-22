@@ -38,7 +38,7 @@ public final class ResizeableArrayStack<T> implements StackInterface<T> {
 
     @Override
     public void push(T newEntry) {
-        // checkInyegrity();
+        // checkIntegrity();
         ensureCapacity();
         stack[topIndex + 1] = newEntry;
         topIndex++;
@@ -47,8 +47,14 @@ public final class ResizeableArrayStack<T> implements StackInterface<T> {
 
     @Override
     public T pop() {
-        // TODO Auto-generated method stub
-        return null;
+        if (isEmpty()) {
+            throw new EmptyStackException();
+        } else {
+            T top = stack[topIndex];
+            stack[topIndex] = null;
+            topIndex--;
+            return top;
+        }
     }
 
     @Override
@@ -130,7 +136,7 @@ public final class ResizeableArrayStack<T> implements StackInterface<T> {
     @Override
     public String evaluatePostfix(String postfix) {
 
-        ResizeableArrayStack<Integer> stack = new ResizeableArrayStack<>();
+        ResizeableArrayStack<Integer> stack = new ResizeableArrayStack<Integer>();
 
         // Scan all characters one by one
         for (int i = 0; i < postfix.length(); i++) {
