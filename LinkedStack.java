@@ -42,10 +42,6 @@ public class LinkedStack<T> implements StackInterface<T> {
             next = n;
         }
 
-        public void setData(T val) {
-            data = val;
-        }
-
         public T getData() {
             return data;
         }
@@ -54,9 +50,12 @@ public class LinkedStack<T> implements StackInterface<T> {
             return next;
         }
 
-        public void setNext(Node n) {
-            next = n;
-        }
+        // public void setData(T val) {
+        // data = val;
+        // }
+        // public void setNext(Node n) {
+        // next = n;
+        // }
     }
 
     private static boolean isOperator(char i) {
@@ -111,7 +110,7 @@ public class LinkedStack<T> implements StackInterface<T> {
 
     @Override
     public String evaluatePostfix(String postfix) {
-        // TODO Auto-generated method stub
+
         return null;
     }
 
