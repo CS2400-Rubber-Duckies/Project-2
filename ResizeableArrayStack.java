@@ -14,7 +14,7 @@ public final class ResizeableArrayStack<T> implements StackInterface<T> {
 
     public ResizeableArrayStack(int initialCapacity) {
         IntegrityOK = false;
-        checkCapacity(initialCapacity);
+      //  checkCapacity(initialCapacity);
 
         @SuppressWarnings("unchecked")
         T[] tempStack = (T[]) new Object[initialCapacity];
@@ -23,15 +23,15 @@ public final class ResizeableArrayStack<T> implements StackInterface<T> {
         IntegrityOK = true;
     }
 
-    private void checkCapacity(int initialCapacity) {
+  //  private void checkCapacity(int initialCapacity) {
         // TO DO
-    }
+//    }
 
     private void ensureCapacity() {
         if (topIndex >= stack.length - 1) // If array is full, double its size
         {
             int newLength = 2 * stack.length;
-            checkCapacity(newLength);
+          //  checkCapacity(newLength);
             stack = Arrays.copyOf(stack, newLength);
         } // end if
     }
