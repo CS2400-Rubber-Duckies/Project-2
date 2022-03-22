@@ -7,16 +7,33 @@ public class LinkedStack<T> implements StackInterface<T> {
         topNode = null;
     }
 
+    /**
+     * Adds a new entry to the top of this stack.
+     * 
+     * @param newEntry An object to be added to the stack
+     */
     public void push(T newEntry) {
         topNode = new Node(newEntry, topNode);
     }
 
+    /**
+     * Removes and returns this stack's top entry.
+     * 
+     * @return The object at the top of the stack
+     * @throws EmptyStackException if the stack is empty before the operation
+     */
     public T pop() {
         T top = peek();
         topNode = topNode.getNext();
         return top;
     }
 
+    /**
+     * Retrieves this stack's top entry.
+     * 
+     * @return The object at the top of the stack.
+     * @throws EmptyStackException if the stack is empty.
+     */
     public T peek() {
         if (isEmpty()) {
             throw new EmptyStackException();
@@ -25,10 +42,18 @@ public class LinkedStack<T> implements StackInterface<T> {
         }
     }
 
+    /**
+     * Detects whether this stack is empty.
+     * 
+     * @return True if the stack is empty.
+     */
     public boolean isEmpty() {
         return topNode == null;
     }
 
+    /**
+     * Removes all entries from this stack
+     */
     public void clear() {
         topNode = null;
     }
@@ -58,10 +83,20 @@ public class LinkedStack<T> implements StackInterface<T> {
         // }
     }
 
+    /**
+     * Checks if character parameter is an operator character.
+     * 
+     * @return Boolean for whether character is an operator.
+     */
     private static boolean isOperator(char i) {
         return precedence(i) > 0;
     }
 
+    /**
+     * Assigns value of precendence based on PEMDAS.
+     * 
+     * @return Integer value of precedence.
+     */
     private static int precedence(char i) {
         if (i == '(' || i == ')') {
             return 1;
@@ -75,6 +110,11 @@ public class LinkedStack<T> implements StackInterface<T> {
 
     }
 
+    /**
+     * Converts an infix expression to postfix.
+     * 
+     * @return String of postfix expression.
+     */
     @Override
     public String convertToPostfix(String infix) {
         LinkedStack<Character> operatorStack = new LinkedStack<Character>();
@@ -107,6 +147,11 @@ public class LinkedStack<T> implements StackInterface<T> {
 
     }
 
+    /**
+     * Evaluates postfix expression given numerical values.
+     * 
+     * @return String of postfix expression result.
+     */
     @Override
     public String evaluatePostfix(String postfix) {
         LinkedStack<Integer> valueStack = new LinkedStack<Integer>();

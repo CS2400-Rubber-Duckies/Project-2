@@ -30,13 +30,23 @@ public interface StackInterface<T> {
      */
     public boolean isEmpty();
 
-   
     /**
      * Removes all entries from this stack
      */
     public void clear();
 
+    /**
+     * Converts an infix expression to postfix.
+     * 
+     * @return String of postfix expression.
+     */
     public String convertToPostfix(String infix);
-    public String  evaluatePostfix(String postfix);
+
+    /**
+     * Evaluates postfix expression given numerical values.
+     * 
+     * @return String of postfix expression result.
+     */
+    public String evaluatePostfix(String postfix);
 
 } // end StackInterface
